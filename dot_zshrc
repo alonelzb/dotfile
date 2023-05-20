@@ -15,6 +15,7 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 # hash -d data=$XDG_DATA_HOME
 # hash -d zdot=$ZDOTDIR
 
+# alass {{{
 alias ..='cd ..'
 alias h='history'
 # alias j='z'
@@ -49,6 +50,7 @@ alias gcb='git checkout -b'
 alias gl='git pull'
 alias gm='git merge'
 alias gp='git push'
+# }}}
 
 
 function proxy_on() {
