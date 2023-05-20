@@ -9,7 +9,7 @@ export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 export XDG_DATA_HOME=~/.local/share
 export EDITOR='nvim'
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+# export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 # hash -d config=$XDG_CONFIG_HOME
 # hash -d cache=$XDG_CACHE_HOME
 # hash -d data=$XDG_DATA_HOME
@@ -18,13 +18,14 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 # alass {{{
 alias ..='cd ..'
 alias h='history'
-# alias j='z'
 # lsd
+alias l='lsd -la'
 alias ls='lsd'
 alias ll='lsd -l'
-alias l='lsd -l'
+alias lt='lsd -lt'
+alias lS='lsd -lS'
 alias la='lsd -a'
-alias lla='lsd -la'
+alias ltree='lsd --tree'
 alias pip='pip3'
 alias py='python3'
 # nvim
@@ -34,8 +35,8 @@ alias -s html=nv
 alias -s js=nv
 alias -s ts=nv
 alias -s vue=nv
-alias zshrc='nvim ~/.zshrc'
-alias sr='source ~/.zshrc'
+alias zshrc='nvim ${ZDOTDIR}/.zshrc'
+alias sr='source ${ZDOTDIR}/.zshrc'
 alias clash='~/.config/clash/clash-linux &'
 alias httpd='http -d'
 alias httpb='http -b'
@@ -66,15 +67,17 @@ function proxy_off {
 
 
 # About zsh config
-export HISTFILE=$ZDOTDIR/.zsh_history
-# How many commands zsh will load to memory.
+export HISTFILE=$HOME/.zsh_history
+# 历史纪录条目数量
 export HISTSIZE=10000
-# How many commands history will save on file.
+# 注销后保存的历史纪录条目数量
 export SAVEHIST=10000
+#以附加的方式写入历史纪录
 export HISTTIMEFORMAT="%d/%m/%y %T "
-# History won't save duplicates.
-setopt HIST_IGNORE_ALL_DUPS
-# History won't show duplicates on search.
+# 消除历史记录中的重复条目
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+# 相同的历史路径只保留一个
 setopt HIST_FIND_NO_DUPS
 
 
@@ -93,42 +96,23 @@ export PATH=$HOME/.local/bin:$PATH
 export PNPM_HOME="${XDG_DATA_HOME}/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
 # fnm
-export PATH="${XDG_DATA_HOME}/fnm:$PATH"
+export PATH="$XDG_DATA_HOME/fnm:$PATH"
 eval "`fnm env`"
 
 # fzf
 [ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
 
 
-source ~/.zinit/zinit/zinit.zsh
-# 增强TAB
-# zinit ice lucid wait; zinit light Aloxaf/fzf-tab
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# 语法高亮
-zinit ice lucid wait atinit='zpcompinit'; zinit light zdharma-continuum/fast-syntax-highlighting
-# 自动建议
-zinit ice lucid wait atload='_zsh_autosuggest_start'; zinit light zsh-users/zsh-autosuggestions
-# 补全
-zinit light marlonrichert/zsh-autocomplete
-# zinit ice blockf; zinit light zsh-users/zsh-completions
-# 提示符
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-
-# zsh-autocomplete 配置
-bindkey -M menuselect '\r' .accept-line
-bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
-bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
-
-# 加载OMZ插件
-# zinit snippet OMZL::/completion.zsh
+source ${ZDOTDIR}/plugins.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ## Use emacs key bindings
+
 bindkey '^u' backward-kill-line
 bindkey '^j' autosuggest-execute
 bindkey '^[;' autosuggest-accept
-
+bindkey -s '^[l' 'ls -la\n'

@@ -5,3 +5,4 @@
 
 -- vim.opt.guifont = "Hack Nerd Font:h12"
 vim.opt.cursorcolumn = true
+vim.opt.foldmethod = "marker"
