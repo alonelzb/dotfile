@@ -1,0 +1,132 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export XDG_DATA_HOME=~/.local/share
+export EDITOR='nvim'
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+# hash -d config=$XDG_CONFIG_HOME
+# hash -d cache=$XDG_CACHE_HOME
+# hash -d data=$XDG_DATA_HOME
+# hash -d zdot=$ZDOTDIR
+
+alias ..='cd ..'
+alias h='history'
+# alias j='z'
+# lsd
+alias ls='lsd'
+alias ll='lsd -l'
+alias l='lsd -l'
+alias la='lsd -a'
+alias lla='lsd -la'
+alias pip='pip3'
+alias py='python3'
+# nvim
+alias nv='nvim'
+alias -s py=nv
+alias -s html=nv
+alias -s js=nv
+alias -s ts=nv
+alias -s vue=nv
+alias zshrc='nvim ~/.zshrc'
+alias sr='source ~/.zshrc'
+alias clash='~/.config/clash/clash-linux &'
+alias httpd='http -d'
+alias httpb='http -b'
+# git
+alias g='git'
+
+alias ga='git add'
+alias gaa='git add --all'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gcb='git checkout -b'
+alias gl='git pull'
+alias gm='git merge'
+alias gp='git push'
+
+
+function proxy_on() {
+    export http_proxy=http://127.0.0.1:7890
+    export https_proxy=http://127.0.0.1:7890
+    echo 'proxy on'
+}
+#proxy_on
+function proxy_off {
+    unset http_proxy
+    unset https_proxy
+}
+
+
+# About zsh config
+export HISTFILE=$ZDOTDIR/.zsh_history
+# How many commands zsh will load to memory.
+export HISTSIZE=10000
+# How many commands history will save on file.
+export SAVEHIST=10000
+export HISTTIMEFORMAT="%d/%m/%y %T "
+# History won't save duplicates.
+setopt HIST_IGNORE_ALL_DUPS
+# History won't show duplicates on search.
+setopt HIST_FIND_NO_DUPS
+
+
+
+
+eval "$(zoxide init --cmd j zsh)"
+
+
+# 环境变量
+export PATH=/usr/local/python3/bin:$PATH
+export PATH=/usr/local/nvim-linux64/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+# pnpm
+export PNPM_HOME="${XDG_DATA_HOME}/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+# fnm
+export PATH="${XDG_DATA_HOME}/fnm:$PATH"
+eval "`fnm env`"
+
+# fzf
+[ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
+
+
+source ~/.zinit/zinit/zinit.zsh
+# 增强TAB
+# zinit ice lucid wait; zinit light Aloxaf/fzf-tab
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# 语法高亮
+zinit ice lucid wait atinit='zpcompinit'; zinit light zdharma-continuum/fast-syntax-highlighting
+# 自动建议
+zinit ice lucid wait atload='_zsh_autosuggest_start'; zinit light zsh-users/zsh-autosuggestions
+# 补全
+zinit light marlonrichert/zsh-autocomplete
+# zinit ice blockf; zinit light zsh-users/zsh-completions
+# 提示符
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+
+# zsh-autocomplete 配置
+bindkey -M menuselect '\r' .accept-line
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+
+# 加载OMZ插件
+# zinit snippet OMZL::/completion.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+## Use emacs key bindings
+bindkey '^u' backward-kill-line
+bindkey '^j' autosuggest-execute
+bindkey '^[;' autosuggest-accept
+
