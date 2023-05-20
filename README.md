@@ -1,0 +1,2 @@
+# dotfile
+chezmoi manage dotfiles
