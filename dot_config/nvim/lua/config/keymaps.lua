@@ -16,6 +16,7 @@ del("n", "L")
 set("i", "jk", "<ESC>")
 set("n", "cw", "ciw")
 set("n", "dw", "diw")
+set("n", "<leader>wq", "<cmd>wq<cr>")
 -- like emacs
 set("i", "<C-b>", "<Left>")
 set("i", "<C-f>", "<Right>")

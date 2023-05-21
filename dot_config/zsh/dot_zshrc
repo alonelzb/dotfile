@@ -45,39 +45,58 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 
 
-
-
 eval "$(zoxide init --cmd j zsh)"
 
 
 # 环境变量
-export PATH=/usr/local/python3/bin:$PATH
-export PATH=/usr/local/nvim-linux64/bin:$PATH
-export PATH=/usr/local/go/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
+for i (python3 nvim-linux64 go) {
+  bin_path="$XDG_DATA_HOME/$i/bin"
+  if [[ -d "$XDG_DATA_HOME/$i" ]] {
+    export PATH=$PATH:$bin_path
+  }
+}
+# export PATH=$PATH:/usr/local/python3/bin
+# export PATH=$PATH:/usr/local/nvim-linux64/bin
+# export PATH=$PATH:/usr/local/go/bin
+# export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin
 # pnpm
 export PNPM_HOME="${XDG_DATA_HOME}/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
 # fnm
-export PATH="$XDG_DATA_HOME/fnm:$PATH"
+export PATH="$PATH:$XDG_DATA_HOME/fnm"
 eval "`fnm env`"
 
-# fzf
-[ -f ~/.config/fzf/fzf.zsh ] && source ~/.config/fzf/fzf.zsh
 
 
 source ${ZDOTDIR}/aliases.zsh
 source ${ZDOTDIR}/plugins.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ## Use emacs key bindings
-
+bindkey -e
 bindkey '^u' backward-kill-line
 bindkey '^j' autosuggest-execute
 bindkey '^[;' autosuggest-accept
-bindkey -s '^[l' 'ls -la\n'
+bindkey -s '^[l' 'lsd -la\n'
+
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# tools
+# fzf
+. ~/.config/fzf/fzf.zsh
+# bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+alias bathelp='bat --plain --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}

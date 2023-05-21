@@ -1,0 +1,29 @@
+classic: false
+
+color:
+  # theme: dracula
+  theme: hardhacker
+
+# 显示顺序
+blocks:
+  - permission
+  - user
+  - group
+  - size
+  - date
+  - name
+
+# 'relative' 'date'
+date: '+%F %T'
+
+icons:
+  # When to use icons.
+  # When "classic" is set, this is set to "never".
+  # Possible values: always, auto, never
+  when: auto
+  # Which icon theme to use.
+  # Possible values: fancy, unicode
+  theme: fancy
+  # Separator between icon and the name
+  # Default to 1 space
+  separator: " "
