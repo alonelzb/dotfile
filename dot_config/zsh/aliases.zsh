@@ -1,6 +1,7 @@
 # alass
 alias ..='cd ..'
 alias h='history'
+alias conf='cd ~/.config'
 # lsd
 alias l='lsd'
 alias la='lsd -a'

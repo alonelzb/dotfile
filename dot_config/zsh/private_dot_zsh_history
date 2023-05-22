@@ -733,3 +733,95 @@ git commit -m 'update fzf'
 git push
 chezmoi unmanaged ~/.config
 chezmoi add ~/.config/zsh/.zsh_history
+g a
+g add
+git commit -m 'add zsh history'
+git push
+j nvim
+nv
+ls
+nv init.lua
+nv
+fzf
+nv
+sr
+nv
+sr
+f
+fzf
+fe
+fe --preview
+fzf
+nv
+sr
+fzf
+nv
+sr
+fzf
+nv
+cd ~zdot
+ls
+lsd -la
+nv functions.zsh
+fg
+config --help
+fg
+sr
+conf
+nv
+sr
+cd
+conf
+pwd
+lsd -la
+l
+la
+cd
+take hello
+pwd
+conf
+tree
+ltree
+vim $(fzf)
+nv `fzf`
+fe
+cd
+chezmoi edit ~/.zshenv
+nv .zshenv
+chezmoi edit ~/.zshenv
+chezmoi diff
+l
+conf
+ls
+pwd
+l
+take scripts
+nv install.sh
+chmod +x install.sh
+./install.sh
+chezmoi edit
+pwd
+cd
+chezmoi edit
+cd
+chezmoi edit
+conf
+cd ~data
+l
+pwd
+cd chezmoi
+git status
+cd
+chezmoi diff
+chezmoi git status
+c
+chezmoi cd
+pwd
+chezmoi git --
+chezmoi git -- status
+chezmoi merge
+chezmoi cd ~
+pwd
+chezmoi cd 
+time zsh -i -c exit
+chezmoi re-add

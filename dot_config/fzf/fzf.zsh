@@ -15,8 +15,11 @@ if [[ -d $HOME/.fzf ]] {
 
 # custom setting
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --follow --hidden --exclude .git'
+# --bind ?:toggle-preview,alt-w:toggle-preview-wrap
 export FZF_DEFAULT_OPTS='
---height 60% --layout=reverse --border --info=inline
+--height 60% --layout=reverse --border --info=inline --pointer '➤' --marker '┃'
+--cycle
+--bind alt-p:preview-up,alt-n:preview-down
 --color=dark
 --color=fg:-1,bg:-1,hl:#5fff87,fg+:cyan,bg+:99,hl+:#ffaf5f
 --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
