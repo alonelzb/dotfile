@@ -1,1 +1,13 @@
-export ZDOTDIR=$HOME/.config/zsh
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export XDG_DATA_HOME=~/.local/share
+
+export EDITOR='nvim'
+# export ZDOTDIR=$HOME/.config/zsh
+ZDOTDIR=$XDG_CONFIG_HOME/zsh
+
+typeset -U path
+path=(
+  $path
+  ~/.local/bin
+ )

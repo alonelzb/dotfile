@@ -15,24 +15,34 @@ if [[ -d $HOME/.fzf ]] {
 
 # custom setting
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --follow --hidden --exclude .git'
-
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--select-1 --exit-0"
-
-export FZF_ALT_C_COMMAND="fd --type d --hidden"
-
-# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-# --exact 
 export FZF_DEFAULT_OPTS='
 --height 60% --layout=reverse --border --info=inline
-
 --color=dark
 --color=fg:-1,bg:-1,hl:#5fff87,fg+:cyan,bg+:99,hl+:#ffaf5f
 --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
 '
-#W 历史记录
-export FZF_CTRL_R_OPTS='--no-sort --exact'
 
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--select-1 --exit-0"
+# export FZF_CTRL_T_OPTS="
+#   --preview 'bat -n --color=always {}'
+#   --bind 'ctrl-/:change-preview-window(down|hidden|)'
+# "
+
+# CTRL-/ to toggle small preview window to see the full command
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'
+"
+
+export FZF_ALT_C_COMMAND="fd --type d --hidden"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+# 历史记录
+# export FZF_CTRL_R_OPTS='--no-sort --exact'
 # Directly executing the command (CTRL-X CTRL-R)
 fzf-history-widget-accept() {
   fzf-history-widget
@@ -55,7 +65,7 @@ fe() {
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
 }
-
+#
 fo() {
   IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
   key=$(head -1 <<< "$out")
@@ -65,3 +75,6 @@ fo() {
   fi
 }
 
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
