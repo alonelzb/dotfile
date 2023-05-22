@@ -23,6 +23,8 @@ alias sr='source $ZDOTDIR/.zshrc'
 alias clash='~/.config/clash/clash-linux &'
 alias httpd='http -d'
 alias httpb='http -b'
+# chezmoi
+alias cz='chezmoi'
 # git
 # alias g='git'
 # alias ga='git add'
