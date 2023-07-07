@@ -25,6 +25,8 @@ alias httpd='http -d'
 alias httpb='http -b'
 # chezmoi
 alias cz='chezmoi'
+# other
+alias projects='cd ~/Documents/projects'
 # git
 # alias g='git'
 # alias ga='git add'

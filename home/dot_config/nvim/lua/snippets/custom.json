@@ -1,0 +1,14 @@
+{
+  "log": {
+    "prefix": "log",
+    "body": ["console.log($1)"]
+  },
+  "function": {
+    "prefix": "fun",
+    "body": ["function ${1:fname}($2) {\n\t$3\n}"]
+  },
+  "arrow function": {
+    "prefix": "an",
+    "body": ["${1:params} => $2"]
+  }
+}

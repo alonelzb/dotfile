@@ -3,6 +3,12 @@
 -- Add any additional options here
 --
 
+local opt = vim.opt
 -- vim.opt.guifont = "Hack Nerd Font:h12"
-vim.opt.cursorcolumn = true
-vim.opt.foldmethod = "marker"
+opt.cursorcolumn = true
+opt.foldmethod = "marker"
+opt.tabstop = 4
+opt.shiftwidth = 4
+-- vim.opt.list = true
+opt.listchars:append("space:⋅")
+-- vim.opt.listchars:append("eol:↴")

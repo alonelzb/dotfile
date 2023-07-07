@@ -6,7 +6,7 @@
 if [[ -d $HOME/.fzf ]] {
   . "$HOME/.fzf/shell/completion.zsh"
   . "$HOME/.fzf/shell/key-bindings.zsh"
-  PATH="$PATH:$HOME/.fzf/bin"
+  PATH="$HOME/.fzf/bin:$PATH"
 } else {
   . "/usr/share/fzf/completion.zsh"
   . "/usr/share/fzf/key-bindings.zsh"
@@ -62,13 +62,25 @@ f() {
     sels=( "${(@f)$(fd "${fd_default[@]}" "${@:2}"| fzf)}" )
     test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
 }
+
+fh() {
+  fd -H $@ ~ | fzf
+}
+
+# cdf - cd into the directory of the selected file
+cdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
 # Exit if there's no match (--exit-0)
 # Bypass fuzzy finder if there's only one match (--select-1)
 fe() {
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && ${EDITOR:-nvim} "${files[@]}"
 }
-#
+
 fo() {
   IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
   key=$(head -1 <<< "$out")

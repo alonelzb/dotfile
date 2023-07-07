@@ -1,7 +1,6 @@
 return {
     "folke/noice.nvim",
     config = function()
-        require("noice")
         --
         require("noice").setup({
             messages = {
@@ -92,6 +91,7 @@ return {
 			view = "notify",
 		}, ]]
                 {
+
                     filter = {
                         event = "msg_show",
                         kind = "",

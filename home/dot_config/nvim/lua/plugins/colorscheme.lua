@@ -1,4 +1,5 @@
-local colorschemes = { "gruvbox", "dracula", "monokai-pro", "zephyr", "onedark", "kanagawa", "catppuccin" }
+local colorschemes =
+    { "gruvbox", "dracula", "monokai-pro", "zephyr", "onedark", "kanagawa", "catppuccin", "tokyonight" }
 local function randomColor()
     math.randomseed(os.time())
     return colorschemes[math.random(#colorschemes)]
@@ -21,6 +22,16 @@ return {
                 italic_comment = true, -- default false
             })
         end,
+    },
+
+    -- tokyonight
+    "folke/tokyonight.nvim",
+    opts = {
+        transparent = true,
+        styles = {
+            sidebars = "transparent",
+            floats = "transparent",
+        },
     },
 
     -- kanagawa
@@ -101,8 +112,8 @@ return {
         "LazyVim/LazyVim",
         opts = {
             -- gruvbox catppuccin dracula kanagawa zephyr onedarkpro monokai
-            colorscheme = "dracula",
-            -- colorscheme = randomColor(),
+            -- colorscheme = "dracula",
+            colorscheme = randomColor(),
         },
     },
 }

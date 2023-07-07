@@ -8,6 +8,6 @@ ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
 typeset -U path
 path=(
-  $path
   ~/.local/bin
+  $path
  )
