@@ -36,6 +36,12 @@ export PATH=$PNPM_HOME:$PATH
 export PATH=$XDG_DATA_HOME/fnm:$PATH
 eval "`fnm env`"
 
+# python3
+export PATH=/usr/local/python3/bin:$PATH
+
+# nvim
+export PATH=/usr/local/nvim-linux64/bin:$PATH
+
 
 . $ZDOTDIR/aliases.zsh
 
