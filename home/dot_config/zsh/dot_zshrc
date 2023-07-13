@@ -42,16 +42,6 @@ export PATH=/usr/local/python3/bin:$PATH
 # nvim
 export PATH=/usr/local/nvim-linux64/bin:$PATH
 
-
-. $ZDOTDIR/aliases.zsh
-
-## Use emacs key bindings
-bindkey -e
-bindkey '^u' backward-kill-line
-bindkey '^j' autosuggest-execute
-bindkey '^[;' autosuggest-accept
-bindkey -s '^[l' 'lsd -la\n'
-
 # tools
 
 # bat
@@ -67,7 +57,6 @@ help() {
 . ~/.config/fzf/fzf.zsh
 
 . ~/.config/zsh/plugins.zsh
-. ~/.config/zsh/functions.zsh
 
 # atuin
 export ATUIN_NOBIND="true"
@@ -77,3 +66,16 @@ bindkey '^r' _atuin_search_widget
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 autoload -Uz cdr
+
+## Use emacs key bindings
+# bindkey -e
+bindkey '^u' backward-kill-line
+bindkey '^j' autosuggest-execute
+bindkey '^[;' autosuggest-accept
+bindkey -s '^[l' 'lsd -la\n'
+
+# 语法高亮
+zinit ice lucid wait atinit='zpcompinit'; zinit light zdharma-continuum/fast-syntax-highlighting
+
+. ~/.config/zsh/aliases.zsh
+. ~/.config/zsh/functions.zsh
