@@ -7,7 +7,9 @@ if [[ -d $HOME/.fzf ]] {
   . "$HOME/.fzf/shell/completion.zsh"
   . "$HOME/.fzf/shell/key-bindings.zsh"
   PATH="$HOME/.fzf/bin:$PATH"
-} else {
+} 
+
+if [[ -d /usr/share/fzf ]] {
   . "/usr/share/fzf/completion.zsh"
   . "/usr/share/fzf/key-bindings.zsh"
 }
